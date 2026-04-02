@@ -1,15 +1,38 @@
 <!DOCTYPE html>
-<html>
-<head><title>MANDADOS | LEDL</title></head>
-<body style="background:#000; color:#0f0; text-align:center;">
-    <h1 id="price" style="font-size:50px;">CARGANDO...</h1>
-    <script>
-        function check() {
-            const h = new Date().getHours();
-            let p = (h>=10 && h<22) ? "$35" : (h>=22 || h<1) ? "$40" : "$50";
-            document.getElementById('price').innerHTML = p;
-        }
-        setInterval(check, 1000); check();
-    </script>
+<html lang="es-MX">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CEREBRO OPERATIVO LEDL</title>
+    <style>
+        body { background: #000; color: #d4af37; font-family: monospace; text-align: center; padding: 20px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin-top: 20px; }
+        .card { border: 1px solid #0047ff; padding: 20px; background: rgba(0,71,255,0.1); border-radius: 10px; }
+        .btn { display: block; padding: 12px; margin: 10px 0; border: 1px solid #0f0; color: #0f0; text-decoration: none; font-weight: bold; font-size: 13px; }
+        .btn:hover { background: #0f0; color: #000; }
+        h1 { border-bottom: 2px solid #d4af37; padding-bottom: 10px; }
+    </style>
+</head>
+<body>
+    <h1>NODO MAESTRO: J. ANDRES RESENDEZ R.</h1>
+    <div class="grid">
+        <div class="card">
+            <h3>📦 LOGÍSTICA</h3>
+            <a href="mandados/index.html" class="btn">TE HACEMOS LOS MANDADOS ($35/$40/$50)</a>
+            <a href="panel.html" class="btn">PANEL DE CONTROL</a>
+        </div>
+        <div class="card">
+            <h3>🛡️ SEGURIDAD & IA</h3>
+            <a href="menu_ledl.py" class="btn">MÓDULO ENSDELIZ PREVENTIVA</a>
+            <a href="social_capture_ledl.py" class="btn">AIKO CYBERSECURITY</a>
+        </div>
+        <div class="card">
+            <h3>⚙️ SISTEMA</h3>
+            <a href="server.js" class="btn">NODE SERVER (LEDL_OS)</a>
+            <a href="ledl_master_merge.sh" class="btn">MASTER MERGE TOOL</a>
+        </div>
+    </div>
+    <div style="margin-top:40px; font-size:10px; opacity:0.5;">
+        LAS ENSEÑANZAS DE LIZ A.C. | VALLE DEL ROBLE | 2026
+    </div>
 </body>
 </html>
