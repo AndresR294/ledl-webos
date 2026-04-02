@@ -1,8 +1,6 @@
-.cargo/
-.gradle/
-.android/
-.npm/
-.config/
-node_modules/
+.DECOY/
+.PROCESADOS/
+.ledl_tmp/
+.ledl_runtime/
+.env.local
 *.log
-.DS_Store
