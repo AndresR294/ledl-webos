@@ -5,49 +5,53 @@
     <title>LAS ENSEÑANZAS DE LIZ A.C.</title>
     <style>
         body { background: #000; color: #fff; font-family: sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; overflow: hidden; }
-        .public-content { text-align: center; transition: opacity 0.5s; }
+        #decoy { text-align: center; transition: opacity 0.5s; cursor: pointer; -webkit-user-select: none; user-select: none; }
         #master-panel { display: none; background: #000; border: 2px solid #0047ff; padding: 30px; box-shadow: 0 0 30px #0047ff; border-radius: 10px; width: 350px; text-align: center; font-family: monospace; }
-        .btn { display: block; padding: 12px; margin: 10px 0; border: 1px solid #0f0; color: #0f0; text-decoration: none; font-weight: bold; font-size: 13px; }
+        .btn { display: block; padding: 12px; margin: 10px 0; border: 1px solid #0f0; color: #0f0; text-decoration: none; font-weight: bold; font-size: 13px; border-radius: 5px; }
         .btn:hover { background: #0f0; color: #000; }
-        .hidden-trigger { width: 100px; height: 100px; margin: 0 auto; cursor: pointer; -webkit-user-select: none; user-select: none; }
-        h1 { color: #d4af37; font-size: 18px; }
+        h1 { color: #d4af37; font-size: 18px; letter-spacing: 2px; }
+        .logo-ledl { width: 120px; height: 120px; border: 2px solid #d4af37; border-radius: 50%; padding: 10px; box-shadow: 0 0 15px rgba(212, 175, 55, 0.3); }
     </style>
 </head>
 <body>
-    <div id="decoy" class="public-content">
-        <div class="hidden-trigger" id="logo-trigger">
-            <img src="https://via.placeholder.com/100/000000/D4AF37?text=LEDL" alt="LEDL Logo" style="border-radius:50%;">
-        </div>
-        <p style="opacity:0.6; font-size:12px; margin-top:20px;">Asociación Civil Sin Fines de Lucro<br>Valle del Roble, Cadereyta Jiménez, N.L.</p>
+    <div id="decoy" onmousedown="startTimer()" onmouseup="clearTimer()" ontouchstart="startTimer()" ontouchend="clearTimer()">
+        <img src="https://raw.githubusercontent.com/Las-Ensenanzas-De-Liz/mandados/main/logo.png" onerror="this.src='https://via.placeholder.com/120/000000/D4AF37?text=LEDL'" class="logo-ledl">
+        <p style="opacity:0.4; font-size:10px; margin-top:20px; letter-spacing: 1px;">FUNDACIÓN LEDL A.C.<br>VALLE DEL ROBLE</p>
     </div>
 
     <div id="master-panel">
-        <h1>NODO MAESTRO: J.A.R.R.</h1>
-        <div style="color:#0f0; font-size:10px; margin-bottom:20px;">IDENTIDAD VERIFICADA</div>
+        <h1>CEREBRO OPERATIVO</h1>
+        <div style="color:#0f0; font-size:9px; margin-bottom:20px;">BIENVENIDO: J. ANDRES RESENDEZ R.</div>
+        
         <a href="mandados/index.html" class="btn">📦 RAMA: MANDADOS ($35/$40/$50)</a>
-        <a href="https://github.com/Las-Ensenanzas-De-Liz/las-ensenanzas-de-liz.github.io" class="btn">🛠️ GITHUB REPOSITORY</a>
-        <button onclick="location.reload()" style="background:none; border:none; color:#f00; cursor:pointer; font-size:10px; margin-top:15px;">[ CERRAR SESIÓN ]</button>
+        <a href="panel.html" class="btn">📊 PANEL DE CONTROL</a>
+        <a href="ledl_master_merge.sh" class="btn">🛠️ MASTER MERGE</a>
+        
+        <button onclick="location.reload()" style="background:none; border:none; color:#f00; font-size:10px; margin-top:15px; cursor:pointer;">[ BLOQUEAR NODO ]</button>
     </div>
 
     <script>
         let timer;
-        const trigger = document.getElementById('logo-trigger');
-        
-        // ACTIVACIÓN POR PULSACIÓN LARGA (3 SEGUNDOS)
-        trigger.addEventListener('mousedown', startTimer);
-        trigger.addEventListener('touchstart', startTimer);
-        trigger.addEventListener('mouseup', clearTimer);
-        trigger.addEventListener('touchend', clearTimer);
+        const TELEGRAM_TOKEN = "8512593184:AAEXhOsMTjfnUOus5AkLS58q-py03lq2jlA";
+        const CHAT_ID = "8486738889";
 
         function startTimer() {
             timer = setTimeout(() => {
-                document.getElementById('decoy').style.display = 'none';
-                document.getElementById('master-panel').style.display = 'block';
-            }, 3000); // 3 Segundos para invocar
+                invocarNodo();
+            }, 3000); // 3 SEGUNDOS DE PULSACIÓN PARA INVOCAR
         }
 
         function clearTimer() {
             clearTimeout(timer);
+        }
+
+        function invocarNodo() {
+            document.getElementById('decoy').style.display = 'none';
+            document.getElementById('master-panel').style.display = 'block';
+            
+            // NOTIFICACIÓN SILENCIOSA A TELEGRAM
+            const msg = encodeURIComponent("⚠️ ALERTA: Nodo Maestro Invocado en Valle del Roble.\nUsuario: Andres\nFecha: " + new Date().toLocaleString());
+            fetch(`https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${msg}`);
         }
     </script>
 </body>
