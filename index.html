@@ -2,37 +2,53 @@
 <html lang="es-MX">
 <head>
     <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CEREBRO OPERATIVO LEDL</title>
+    <title>LAS ENSEÑANZAS DE LIZ A.C.</title>
     <style>
-        body { background: #000; color: #d4af37; font-family: monospace; text-align: center; padding: 20px; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin-top: 20px; }
-        .card { border: 1px solid #0047ff; padding: 20px; background: rgba(0,71,255,0.1); border-radius: 10px; }
+        body { background: #000; color: #fff; font-family: sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; overflow: hidden; }
+        .public-content { text-align: center; transition: opacity 0.5s; }
+        #master-panel { display: none; background: #000; border: 2px solid #0047ff; padding: 30px; box-shadow: 0 0 30px #0047ff; border-radius: 10px; width: 350px; text-align: center; font-family: monospace; }
         .btn { display: block; padding: 12px; margin: 10px 0; border: 1px solid #0f0; color: #0f0; text-decoration: none; font-weight: bold; font-size: 13px; }
         .btn:hover { background: #0f0; color: #000; }
-        h1 { border-bottom: 2px solid #d4af37; padding-bottom: 10px; }
+        .hidden-trigger { width: 100px; height: 100px; margin: 0 auto; cursor: pointer; -webkit-user-select: none; user-select: none; }
+        h1 { color: #d4af37; font-size: 18px; }
     </style>
 </head>
 <body>
-    <h1>NODO MAESTRO: J. ANDRES RESENDEZ R.</h1>
-    <div class="grid">
-        <div class="card">
-            <h3>📦 LOGÍSTICA</h3>
-            <a href="mandados/index.html" class="btn">TE HACEMOS LOS MANDADOS ($35/$40/$50)</a>
-            <a href="panel.html" class="btn">PANEL DE CONTROL</a>
+    <div id="decoy" class="public-content">
+        <div class="hidden-trigger" id="logo-trigger">
+            <img src="https://via.placeholder.com/100/000000/D4AF37?text=LEDL" alt="LEDL Logo" style="border-radius:50%;">
         </div>
-        <div class="card">
-            <h3>🛡️ SEGURIDAD & IA</h3>
-            <a href="menu_ledl.py" class="btn">MÓDULO ENSDELIZ PREVENTIVA</a>
-            <a href="social_capture_ledl.py" class="btn">AIKO CYBERSECURITY</a>
-        </div>
-        <div class="card">
-            <h3>⚙️ SISTEMA</h3>
-            <a href="server.js" class="btn">NODE SERVER (LEDL_OS)</a>
-            <a href="ledl_master_merge.sh" class="btn">MASTER MERGE TOOL</a>
-        </div>
+        <p style="opacity:0.6; font-size:12px; margin-top:20px;">Asociación Civil Sin Fines de Lucro<br>Valle del Roble, Cadereyta Jiménez, N.L.</p>
     </div>
-    <div style="margin-top:40px; font-size:10px; opacity:0.5;">
-        LAS ENSEÑANZAS DE LIZ A.C. | VALLE DEL ROBLE | 2026
+
+    <div id="master-panel">
+        <h1>NODO MAESTRO: J.A.R.R.</h1>
+        <div style="color:#0f0; font-size:10px; margin-bottom:20px;">IDENTIDAD VERIFICADA</div>
+        <a href="mandados/index.html" class="btn">📦 RAMA: MANDADOS ($35/$40/$50)</a>
+        <a href="https://github.com/Las-Ensenanzas-De-Liz/las-ensenanzas-de-liz.github.io" class="btn">🛠️ GITHUB REPOSITORY</a>
+        <button onclick="location.reload()" style="background:none; border:none; color:#f00; cursor:pointer; font-size:10px; margin-top:15px;">[ CERRAR SESIÓN ]</button>
     </div>
+
+    <script>
+        let timer;
+        const trigger = document.getElementById('logo-trigger');
+        
+        // ACTIVACIÓN POR PULSACIÓN LARGA (3 SEGUNDOS)
+        trigger.addEventListener('mousedown', startTimer);
+        trigger.addEventListener('touchstart', startTimer);
+        trigger.addEventListener('mouseup', clearTimer);
+        trigger.addEventListener('touchend', clearTimer);
+
+        function startTimer() {
+            timer = setTimeout(() => {
+                document.getElementById('decoy').style.display = 'none';
+                document.getElementById('master-panel').style.display = 'block';
+            }, 3000); // 3 Segundos para invocar
+        }
+
+        function clearTimer() {
+            clearTimeout(timer);
+        }
+    </script>
 </body>
 </html>
