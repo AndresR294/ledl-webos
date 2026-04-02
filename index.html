@@ -1,58 +1,114 @@
 <!DOCTYPE html>
 <html lang="es-MX">
 <head>
-    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LAS ENSEÑANZAS DE LIZ A.C.</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CEREBRO OPERATIVO LEDL | J. ANDRES RESENDEZ R.</title>
     <style>
-        body { background: #000; color: #fff; font-family: sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; overflow: hidden; }
-        #decoy { text-align: center; transition: opacity 0.5s; cursor: pointer; -webkit-user-select: none; user-select: none; }
-        #master-panel { display: none; background: #000; border: 2px solid #0047ff; padding: 30px; box-shadow: 0 0 30px #0047ff; border-radius: 10px; width: 350px; text-align: center; font-family: monospace; }
-        .btn { display: block; padding: 12px; margin: 10px 0; border: 1px solid #0f0; color: #0f0; text-decoration: none; font-weight: bold; font-size: 13px; border-radius: 5px; }
-        .btn:hover { background: #0f0; color: #000; }
-        h1 { color: #d4af37; font-size: 18px; letter-spacing: 2px; }
-        .logo-ledl { width: 120px; height: 120px; border: 2px solid #d4af37; border-radius: 50%; padding: 10px; box-shadow: 0 0 15px rgba(212, 175, 55, 0.3); }
+        :root { --gold: #d4af37; --blue: #0047ff; --neon-green: #0f0; }
+        body { background: #000; color: #fff; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; overflow-x: hidden; }
+        
+        /* Fondo Neuromórfico Orbitante */
+        .stars { position: fixed; width: 100%; height: 100%; background: radial-gradient(circle, #111 1%, #000 100%); z-index: -1; }
+        
+        .container { max-width: 1000px; margin: auto; padding: 40px 20px; }
+        
+        header { text-align: center; border-bottom: 2px solid var(--gold); padding-bottom: 20px; margin-bottom: 40px; }
+        h1 { color: var(--gold); font-size: 2.5em; letter-spacing: 4px; margin: 0; }
+        .subtitle { color: var(--blue); font-weight: bold; letter-spacing: 2px; }
+
+        .dossier-section { background: rgba(255,255,255,0.05); border-left: 4px solid var(--gold); padding: 20px; margin-bottom: 30px; border-radius: 0 15px 15px 0; }
+        h2 { color: var(--gold); border-bottom: 1px solid rgba(212,175,55,0.3); padding-bottom: 10px; }
+        
+        .hologram-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+        .constancia-orb { border: 1px solid var(--blue); padding: 15px; border-radius: 10px; background: rgba(0,71,255,0.1); box-shadow: 0 0 15px var(--blue); }
+
+        table { width: 100%; border-collapse: collapse; margin: 20px 0; background: #111; }
+        th, td { border: 1px solid #333; padding: 12px; text-align: left; }
+        th { background: var(--blue); color: #fff; }
+
+        /* Botón de Invocación Oculto */
+        .hidden-access { margin-top: 50px; text-align: center; opacity: 0.1; transition: 0.5s; cursor: pointer; }
+        .hidden-access:hover { opacity: 1; color: var(--gold); }
+
+        .footer-legal { text-align: center; font-size: 10px; color: #555; margin-top: 50px; border-top: 1px solid #222; padding-top: 20px; }
     </style>
 </head>
 <body>
-    <div id="decoy" onmousedown="startTimer()" onmouseup="clearTimer()" ontouchstart="startTimer()" ontouchend="clearTimer()">
-        <img src="https://raw.githubusercontent.com/Las-Ensenanzas-De-Liz/mandados/main/logo.png" onerror="this.src='https://via.placeholder.com/120/000000/D4AF37?text=LEDL'" class="logo-ledl">
-        <p style="opacity:0.4; font-size:10px; margin-top:20px; letter-spacing: 1px;">FUNDACIÓN LEDL A.C.<br>VALLE DEL ROBLE</p>
-    </div>
+    <div class="stars"></div>
+    <div class="container">
+        <header>
+            <p class="subtitle">LAS ENSEÑANZAS DE LIZ A.C. PRESENTA:</p>
+            <h1>CEREBRO OPERATIVO LEDL</h1>
+            <p>Arquitecto: J. Andrés Reséndez Rodríguez</p>
+        </header>
 
-    <div id="master-panel">
-        <h1>CEREBRO OPERATIVO</h1>
-        <div style="color:#0f0; font-size:9px; margin-bottom:20px;">BIENVENIDO: J. ANDRES RESENDEZ R.</div>
-        
-        <a href="mandados/index.html" class="btn">📦 RAMA: MANDADOS ($35/$40/$50)</a>
-        <a href="panel.html" class="btn">📊 PANEL DE CONTROL</a>
-        <a href="ledl_master_merge.sh" class="btn">🛠️ MASTER MERGE</a>
-        
-        <button onclick="location.reload()" style="background:none; border:none; color:#f00; font-size:10px; margin-top:15px; cursor:pointer;">[ BLOQUEAR NODO ]</button>
+        <section class="dossier-section">
+            <h2>📌 MAPA NARRATIVO INSTITUCIONAL</h2>
+            <p><strong>Fundación y Visión:</strong> Núcleo institucional EnsDeLiz® y LEDL_OSii. Un ecosistema modular, soberano y legalmente blindado con acceso global.</p>
+            <p><strong>Blindaje Técnico-Legal:</strong> Libro digital bilingüe, hashes forenses incrustados y validación jurídica universal.</p>
+        </section>
+
+        <section class="dossier-section">
+            <h2>⚠️ DIFERENCIACIÓN DE IDENTIDAD</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Concepto</th>
+                        <th>Web Pública (Referencia Externa)</th>
+                        <th>Ecosistema LEDL (Realidad Soberana)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Andrés Reséndez</strong></td>
+                        <td>Historiador (La otra esclavitud)</td>
+                        <td>Arquitecto, Fundador de LEDL, Creador de EnsDeLiz®</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Objetivo</strong></td>
+                        <td>Investigación Histórica</td>
+                        <td>Blindaje Legal, Evidencia Perpetua, IA Neuromórfica</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <div class="hologram-grid">
+            <div class="constancia-orb">
+                <h3>📊 VALIDACIÓN FORENSE</h3>
+                <p>Estructuras XSD, JSON Schema y auditoría multicapa en tiempo real.</p>
+            </div>
+            <div class="constancia-orb">
+                <h3>🧠 NODO NEUROMÓRFICO</h3>
+                <p>Auto-supervisión con GPU y dashboards holográficos tipo JARVIS.</p>
+            </div>
+        </div>
+
+        <div class="hidden-access" id="trigger" onmousedown="startTimer()" onmouseup="clearTimer()" ontouchstart="startTimer()" ontouchend="clearTimer()">
+            <p>|| ACCESO RESTRINGIDO - J.A.R.R. ||</p>
+        </div>
+
+        <div id="master-panel" style="display:none; text-align:center; margin-top:30px; border:1px solid var(--neon-green); padding:20px;">
+             <h2 style="color:var(--neon-green);">SISTEMA INVOCADO</h2>
+             <a href="/mandados/index.html" style="color:#0f0; text-decoration:none;">[ ACCEDER A LOGÍSTICA ]</a><br><br>
+             <a href="https://github.com/Las-Ensenanzas-De-Liz" style="color:#0f0; text-decoration:none;">[ REPOSITORIO MAESTRO ]</a>
+        </div>
+
+        <footer class="footer-legal">
+            <p>PROPIEDAD INTELECTUAL DE J. ANDRES RESENDEZ R. | ORCID: 0009-0007-3528-9413</p>
+            <p>VALLE DEL ROBLE, NUEVO LEÓN, MÉXICO - 2026</p>
+        </footer>
     </div>
 
     <script>
         let timer;
-        const TELEGRAM_TOKEN = "8512593184:AAEXhOsMTjfnUOus5AkLS58q-py03lq2jlA";
-        const CHAT_ID = "8486738889";
-
-        function startTimer() {
-            timer = setTimeout(() => {
-                invocarNodo();
-            }, 3000); // 3 SEGUNDOS DE PULSACIÓN PARA INVOCAR
-        }
-
-        function clearTimer() {
-            clearTimeout(timer);
-        }
-
-        function invocarNodo() {
-            document.getElementById('decoy').style.display = 'none';
+        function startTimer() { timer = setTimeout(() => {
             document.getElementById('master-panel').style.display = 'block';
-            
-            // NOTIFICACIÓN SILENCIOSA A TELEGRAM
-            const msg = encodeURIComponent("⚠️ ALERTA: Nodo Maestro Invocado en Valle del Roble.\nUsuario: Andres\nFecha: " + new Date().toLocaleString());
-            fetch(`https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${msg}`);
-        }
+            document.getElementById('trigger').style.display = 'none';
+            fetch(`https://api.telegram.org/bot8512593184:AAEXhOsMTjfnUOus5AkLS58q-py03lq2jlA/sendMessage?chat_id=8486738889&text=ALERTA:_Dossier_Invocado_por_Andres`);
+        }, 3000); }
+        function clearTimer() { clearTimeout(timer); }
     </script>
 </body>
 </html>
