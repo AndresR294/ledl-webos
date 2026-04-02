@@ -1,35 +1,70 @@
 <!DOCTYPE html>
-<html lang="es-MX">
+<html lang="es">
 <head>
-    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CEREBRO OPERATIVO LEDL | J.A.R.R.</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LEDL™ - Las Enseñanzas de Liz</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
-        :root { --gold: #d4af37; --blue: #0047ff; --neon-green: #0f0; }
-        body { background: #000; color: #fff; font-family: 'Courier New', monospace; margin: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; text-align: center; }
-        .storyboard-container { width: 90%; max-width: 600px; border: 2px solid var(--gold); border-radius: 20px; box-shadow: 0 0 50px rgba(212,175,55,0.4); overflow: hidden; cursor: pointer; transition: 0.5s; }
-        .storyboard-container:hover { transform: scale(1.05); }
-        .storyboard-container img { width: 100%; height: auto; display: block; }
-        h1 { color: var(--gold); font-size: 1.4em; letter-spacing: 3px; margin: 20px 0; }
-        .btn { display: block; padding: 15px; margin: 10px auto; border: 1px solid var(--neon-green); color: var(--neon-green); text-decoration: none; width: 250px; border-radius: 10px; font-weight: bold; }
-        #master-panel { display:none; margin-top:20px; border-top: 1px solid var(--blue); padding-top: 20px; }
-        .hidden-trigger { margin-top: 40px; opacity: 0.1; cursor: pointer; font-size: 10px; }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+        body { font-family: 'Inter', sans-serif; background: linear-gradient(135deg, #0f0c29, #302b63, #24243e); color: #fff; margin:0; overflow-x:hidden; }
+        .animated-bg { position:fixed; top:0; left:0; width:100%; height:100%; background:radial-gradient(circle, rgba(255,215,0,0.25) 0%, transparent 70%); animation:ledPulse 5s infinite alternate; z-index:-1; }
+        @keyframes ledPulse { 0%{opacity:0.4} 100%{opacity:1} }
+        header { background:rgba(0,0,0,0.95); padding:15px 20px; display:flex; align-items:center; justify-content:space-between; position:sticky; top:0; z-index:1000; }
+        .logo { font-size:28px; font-weight:800; color:#ffd700; text-shadow:0 0 15px #ffd700; }
+        .hamburger { font-size:30px; color:#ffd700; cursor:pointer; }
+        .menu { position:fixed; top:61px; left:0; width:100%; background:rgba(0,0,0,0.98); max-height:0; overflow:hidden; transition:max-height 0.4s ease; }
+        .menu.open { max-height:100vh; overflow-y:auto; }
+        .nav li { padding:18px 25px; border-bottom:1px solid rgba(255,215,0,0.15); }
+        .nav a { color:#fff; text-decoration:none; font-size:18px; display:flex; align-items:center; gap:12px; }
+        footer { text-align:center; padding:40px 20px; font-size:13px; color:#ffd700; background:rgba(0,0,0,0.9); }
     </style>
 </head>
 <body>
-    <div class="storyboard-container" onclick="alert('Validación Estructural XSD: 100% SUCCESS')">
-        <img src="assets/hologram_ledger.png" alt="Cerebro Operativo LEDL">
+    <div class="animated-bg"></div>
+    
+    <!-- HEADER -->
+    <header>
+        <div class="logo">LEDL™</div>
+        <div style="font-size:18px;">Las Enseñanzas de Liz</div>
+        <i class="fa fa-bars hamburger" onclick="toggleMenu()"></i>
+    </header>
+
+    <!-- MENÚ HAMBURGUESA TIPO ÁRBOL -->
+    <div id="menu" class="menu">
+        <ul class="nav" style="list-style:none; padding:0; margin:0;">
+            <li><a href="/"><i class="fa fa-home"></i> Inicio - Cerebro Operativo LEDL</a></li>
+            <li><a href="/libro/"><i class="fa fa-folder-open"></i> libro</a></li>
+            <li><a href="/LOGS/"><i class="fa fa-folder-open"></i> LOGS</a></li>
+            <li><a href="/ledl_ultra_kernel/"><i class="fa fa-folder-open"></i> ledl_ultra_kernel</a></li>
+            <li><a href="/mandados/"><i class="fa fa-folder-open"></i> mandados</a></li>
+            <li><a href="/app/"><i class="fa fa-folder-open"></i> app</a></li>
+            <li><a href="/api/"><i class="fa fa-folder-open"></i> api</a></li>
+            <li><a href="/bots/"><i class="fa fa-folder-open"></i> bots</a></li>
+            <li><a href="/ledl_os/"><i class="fa fa-folder-open"></i> ledl_os</a></li>
+            <li><a href="/WebMachine_LEDL/"><i class="fa fa-folder-open"></i> WebMachine_LEDL</a></li>
+            <li><a href="/LEDL_MASTER/"><i class="fa fa-folder-open"></i> LEDL_MASTER</a></li>
+            <li><a href="/ledl_kernel/"><i class="fa fa-folder-open"></i> ledl_kernel</a></li>
+            <li><a href="/backups/"><i class="fa fa-folder-open"></i> backups</a></li>
+            <li><a href="/github_migration_ledl/"><i class="fa fa-folder-open"></i> github_migration_ledl</a></li>
+            <li><a href="/logic/"><i class="fa fa-folder-open"></i> logic</a></li>
+            <li><a href="/core/"><i class="fa fa-folder-open"></i> core</a></li>
+            <li><a href="/storage/"><i class="fa fa-folder-open"></i> storage</a></li>
+            <li><a href="/bridge_ledl/"><i class="fa fa-folder-open"></i> bridge_ledl</a></li>
+            <li><a href="/assets/"><i class="fa fa-folder-open"></i> assets</a></li>
+        </ul>
     </div>
-    <h1>J. ANDRES RESENDEZ RODRIGUEZ</h1>
-    <div class="hidden-trigger" id="t" onmousedown="s()" onmouseup="c()" ontouchstart="s()" ontouchend="c()">|| ACCESO SOBERANO ||</div>
-    <div id="master-panel">
-         <a href="mandados/index.html" class="btn">📦 LOGÍSTICA VALLE DEL ROBLE</a>
-         <a href="https://github.com/Las-Ensenanzas-De-Liz/las-ensenanzas-de-liz.github.io" class="btn">🛠️ NODO GITHUB</a>
-         <button onclick="location.reload()" style="color:red; background:none; border:none; cursor:pointer;">[ BLOQUEAR ]</button>
-    </div>
+
     <script>
-        let timer;
-        const s = () => { timer = setTimeout(() => { document.getElementById('master-panel').style.display='block'; fetch(`https://api.telegram.org/bot8512593184:AAEXhOsMTjfnUOus5AkLS58q-py03lq2jlA/sendMessage?chat_id=8486738889&text=ACCESO_CONFIRMADO_ANDRES`); }, 3000); };
-        const c = () => { clearTimeout(timer); };
+        function toggleMenu() {
+            document.getElementById('menu').classList.toggle('open');
+        }
+        console.log('%c🚀 WebMachine_LEDL v1.2 - Todo desplegado correctamente', 'color:#ffd700; font-size:16px;');
     </script>
+
+    <footer>
+        © 2025 J Andrés Resendez R • ORCID 0009-0007-3528-9413<br>
+        Licencia “Las Enseñanzas de Liz” ©2025 • Lo imposible no existe
+    </footer>
 </body>
 </html>
