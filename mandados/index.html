@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head><title>MANDADOS | LEDL</title></head>
+<body style="background:#000; color:#0f0; text-align:center;">
+    <h1 id="price" style="font-size:50px;">CARGANDO...</h1>
+    <script>
+        function check() {
+            const h = new Date().getHours();
+            let p = (h>=10 && h<22) ? "$35" : (h>=22 || h<1) ? "$40" : "$50";
+            document.getElementById('price').innerHTML = p;
+        }
+        setInterval(check, 1000); check();
+    </script>
+</body>
+</html>
