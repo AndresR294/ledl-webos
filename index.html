@@ -1,22 +1,15 @@
 <!DOCTYPE html>
-<html lang="es-MX">
-<head>
-    <meta charset="UTF-8"><title>CEREBRO OPERATIVO LEDL</title>
-    <style>
-        body { background:#000; color:#d4af37; font-family:monospace; padding:20px; }
-        .category { border:1px solid #0047ff; margin:10px; padding:15px; border-radius:5px; }
-        .file-link { display:block; color:#0f0; text-decoration:none; margin:5px 0; }
-        .file-link:hover { background:#0f0; color:#000; }
-    </style>
-</head>
-<body>
-    <h1>NODO MAESTRO: J. ANDRES RESENDEZ R.</h1>
-    <div id="logistica" class="category"><h3>📦 LOGÍSTICA (MANDADOS)</h3></div>
-<a class="file-link" href="mandados_index.html">> mandados_index.html</a>
-    <div id="seguridad" class="category"><h3>🛡️ SEGURIDAD (AIKO)</h3></div>
-    <div id="matematicas" class="category"><h3>📊 MATEMÁTICAS (ARES-KAL)</h3></div>
-<a class="file-link" href="mapeador_ecosistema_ledl.sh">> mapeador_ecosistema_ledl.sh</a>
-<a class="file-link" href="Orquestador_LEDL.sh">> Orquestador_LEDL.sh</a>
-<a class="file-link" href="panel.html">> panel.html</a>
+<html>
+<head><title>MANDADOS | LEDL</title></head>
+<body style="background:#000; color:#0f0; text-align:center;">
+    <h1 id="price" style="font-size:50px;">CARGANDO...</h1>
+    <script>
+        function check() {
+            const h = new Date().getHours();
+            let p = (h>=10 && h<22) ? "$35" : (h>=22 || h<1) ? "$40" : "$50";
+            document.getElementById('price').innerHTML = p;
+        }
+        setInterval(check, 1000); check();
+    </script>
 </body>
 </html>
