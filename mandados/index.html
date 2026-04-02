@@ -1,15 +1,30 @@
 <!DOCTYPE html>
-<html>
-<head><title>MANDADOS | LEDL</title></head>
-<body style="background:#000; color:#0f0; text-align:center;">
-    <h1 id="price" style="font-size:50px;">CARGANDO...</h1>
-    <script>
-        function check() {
-            const h = new Date().getHours();
-            let p = (h>=10 && h<22) ? "$35" : (h>=22 || h<1) ? "$40" : "$50";
-            document.getElementById('price').innerHTML = p;
-        }
-        setInterval(check, 1000); check();
-    </script>
+<html lang="es-MX">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MANDADOS | VALLE DEL ROBLE</title>
+    <style>
+        body { background: #000; color: #d4af37; font-family: 'Courier New', monospace; text-align: center; padding: 20px; }
+        .price-card { border: 2px solid #0047ff; margin: 15px; padding: 20px; border-radius: 15px; background: rgba(0,71,255,0.1); }
+        .btn-order { display: inline-block; padding: 15px 30px; background: #0f0; color: #000; text-decoration: none; font-weight: bold; border-radius: 5px; margin-top: 20px; }
+        h1 { border-bottom: 2px solid #d4af37; padding-bottom: 10px; font-size: 1.2em; }
+    </style>
+</head>
+<body>
+    <h1>📦 LOGÍSTICA: TE HACEMOS LOS MANDADOS</h1>
+    <div class="price-card">
+        <h3>☀️ SERVICIO DIURNO</h3>
+        <p style="font-size: 2em; margin: 5px;">$35</p>
+    </div>
+    <div class="price-card">
+        <h3>🌙 SERVICIO NOCTURNO</h3>
+        <p style="font-size: 2em; margin: 5px;">$40</p>
+    </div>
+    <div class="price-card">
+        <h3>🌌 MADRUGADA / ESPECIAL</h3>
+        <p style="font-size: 2em; margin: 5px;">$50</p>
+    </div>
+    <a href="https://t.me/8486738889" class="btn-order">SOLICITAR REPARTIDOR (Telegram)</a>
+    <p style="font-size: 10px; margin-top: 30px; opacity: 0.5;">VALLE DEL ROBLE | CADEREYTA JIMÉNEZ</p>
 </body>
 </html>

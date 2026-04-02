@@ -1,75 +1,35 @@
 <!DOCTYPE html>
 <html lang="es-MX">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CEREBRO OPERATIVO LEDL | J. ANDRES RESENDEZ R.</title>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CEREBRO OPERATIVO LEDL | J.A.R.R.</title>
     <style>
         :root { --gold: #d4af37; --blue: #0047ff; --neon-green: #0f0; }
         body { background: #000; color: #fff; font-family: 'Courier New', monospace; margin: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; text-align: center; }
-        
-        .storyboard-container { width: 90%; max-width: 800px; border: 2px solid var(--gold); border-radius: 20px; box-shadow: 0 0 50px rgba(212,175,55,0.3); overflow: hidden; margin: 20px; transition: transform 0.5s; cursor: pointer; }
-        .storyboard-container:hover { transform: scale(1.02); box-shadow: 0 0 70px rgba(212,175,55,0.5); }
+        .storyboard-container { width: 90%; max-width: 600px; border: 2px solid var(--gold); border-radius: 20px; box-shadow: 0 0 50px rgba(212,175,55,0.4); overflow: hidden; cursor: pointer; transition: 0.5s; }
+        .storyboard-container:hover { transform: scale(1.05); }
         .storyboard-container img { width: 100%; height: auto; display: block; }
-        
-        h1 { color: var(--gold); font-size: 1.5em; letter-spacing: 3px; margin: 20px 0 5px 0; }
-        .subtitle { color: var(--blue); font-size: 0.9em; letter-spacing: 2px; }
-
-        .hidden-access { margin-top: 30px; opacity: 0.1; transition: 0.5s; cursor: pointer; }
-        .hidden-access:hover { opacity: 1; color: var(--gold); }
-
-        #master-panel { display:none; margin-top:30px; border:1px solid var(--neon-green); padding:20px; width: 300px; }
-        .btn { display: block; padding: 10px; margin: 10px 0; border: 1px solid var(--neon-green); color: var(--neon-green); text-decoration: none; font-weight: bold; }
-        .btn:hover { background: var(--neon-green); color: #000; }
-
-        .footer-legal { font-size: 10px; color: #555; margin: 30px 0; border-top: 1px solid #222; padding-top: 15px; }
+        h1 { color: var(--gold); font-size: 1.4em; letter-spacing: 3px; margin: 20px 0; }
+        .btn { display: block; padding: 15px; margin: 10px auto; border: 1px solid var(--neon-green); color: var(--neon-green); text-decoration: none; width: 250px; border-radius: 10px; font-weight: bold; }
+        #master-panel { display:none; margin-top:20px; border-top: 1px solid var(--blue); padding-top: 20px; }
+        .hidden-trigger { margin-top: 40px; opacity: 0.1; cursor: pointer; font-size: 10px; }
     </style>
 </head>
 <body>
-    <p class="subtitle">LAS ENSEÑANZAS DE LIZ A.C. PRESENTA EL STORYBOARD INSTITUCIONAL:</p>
-    <h1>EVOLUCIÓN DE LEDL Y CEREBRO OPERATIVO</h1>
-    <p>Arquitecto y Desarrollador Líder: J. Andrés Reséndez Rodríguez</p>
-
-    <div class="storyboard-container" onclick="mostrarInfo()" title="Toque para validar constancias">
-        <img src="https://raw.githubusercontent.com/Las-Ensenanzas-De-Liz/las-ensenanzas-de-liz.github.io/main/assets/hologram_ledger.png" alt="Cerebro Operativo LEDL Hologram">
+    <div class="storyboard-container" onclick="alert('Validación Estructural XSD: 100% SUCCESS')">
+        <img src="assets/hologram_ledger.png" alt="Cerebro Operativo LEDL">
     </div>
-
-    <div class="hidden-access" id="trigger" onmousedown="startTimer()" onmouseup="clearTimer()" ontouchstart="startTimer()" ontouchend="clearTimer()">
-        <p>|| ACCESO SOBERANO - VERIFICACIÓN MAESTRA ||</p>
-    </div>
-
+    <h1>J. ANDRES RESENDEZ RODRIGUEZ</h1>
+    <div class="hidden-trigger" id="t" onmousedown="s()" onmouseup="c()" ontouchstart="s()" ontouchend="c()">|| ACCESO SOBERANO ||</div>
     <div id="master-panel">
-         <h2 style="color:var(--neon-green);">NODO ACTIVADO</h2>
-         <a href="/mandados/index.html" class="btn">[ LOGÍSTICA ]</a>
-         <a href="https://github.com/Las-Ensenanzas-De-Liz" class="btn">[ GITHUB REPO ]</a>
-         <a href="#" class="btn">[ LIBRO TÉCNICO-LEGAL (PDF) ]</a>
-         <button onclick="location.reload()" style="background:none; border:none; color:#f00; font-size:10px; margin-top:15px; cursor:pointer; font-family:monospace;">[ CERRAR ]</button>
+         <a href="mandados/index.html" class="btn">📦 LOGÍSTICA VALLE DEL ROBLE</a>
+         <a href="https://github.com/Las-Ensenanzas-De-Liz" class="btn">🛠️ NODO GITHUB</a>
+         <button onclick="location.reload()" style="color:red; background:none; border:none; cursor:pointer;">[ BLOQUEAR ]</button>
     </div>
-
-    <footer class="footer-legal">
-        <p>ORCID: 0009-0007-3528-9413 | Ecosistema LEDL_OSii Sincronizado</p>
-        <p>VALLE DEL ROBLE, NUEVO LEÓN, MÉXICO - 2026</p>
-    </footer>
-
     <script>
-        // Carga de la imagen para asegurar disponibilidad (Simulación, requiere subir la imagen)
-        const hologramImg = document.querySelector('.storyboard-container img');
-        if(!hologramImg.complete){
-            hologramImg.src = 'https://via.placeholder.com/800x1200/000000/D4AF37?text=CARGANDO_HOLOGRAMA...';
-            // Nota: Debes subir tu imagen a la carpeta 'assets/' para que se vea real
-        }
-
         let timer;
-        function startTimer() { timer = setTimeout(() => {
-            document.getElementById('master-panel').style.display = 'block';
-            document.getElementById('trigger').style.display = 'none';
-            fetch(`https://api.telegram.org/bot8512593184:AAEXhOsMTjfnUOus5AkLS58q-py03lq2jlA/sendMessage?chat_id=8486738889&text=ALERTA:_Holograma_Invocado_por_Andres`);
-        }, 3000); }
-        function clearTimer() { clearTimeout(timer); }
-        
-        function mostrarInfo(){
-            alert("⚠️ Validación Forense: Hitos orbitando verificados por EnsDeLiz®. Ecosistema Sincronizado.");
-        }
+        const s = () => { timer = setTimeout(() => { document.getElementById('master-panel').style.display='block'; fetch(`https://api.telegram.org/bot8512593184:AAEXhOsMTjfnUOus5AkLS58q-py03lq2jlA/sendMessage?chat_id=8486738889&text=ACCESO_CONFIRMADO_ANDRES`); }, 3000); };
+        const c = () => { clearTimeout(timer); };
     </script>
 </body>
 </html>
