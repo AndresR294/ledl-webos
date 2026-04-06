@@ -2,51 +2,124 @@
 <html lang="es-MX">
 <head>
     <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LEDL CORE | MODO DIOS v4.0</title>
+    <title>LEDL CORE | CEREBRO OPERATIVO v5.0</title>
     <style>
-        :root { --neon: #00ffcc; --ac: #0ff; --gold: #ffd700; --bg: #000; }
-        body, html { margin: 0; padding: 0; background: var(--bg); color: var(--neon); font-family: monospace; overflow: hidden; }
-        #hologram-field { position: fixed; top: 0; left: 0; z-index: -1; width: 100vw; height: 100vh; }
-        .point { position: absolute; width: 3px; height: 3px; background: var(--ac); border-radius: 50%; box-shadow: 0 0 10px var(--ac); animation: float 15s infinite linear; }
-        .hud { display: grid; grid-template-columns: 1fr 2fr 1fr; height: 100vh; padding: 10px; gap: 10px; box-sizing: border-box; }
-        .pilar { border: 1px solid var(--neon); background: rgba(0,15,0,0.9); padding: 10px; font-size: 0.65em; text-align: center; display: flex; align-items: center; justify-content: center; }
-        .core-display { grid-column: 2; border: 2px solid #fff; background: radial-gradient(circle, #001a00 0%, #000 95%); display: flex; flex-direction: column; align-items: center; justify-content: space-between; padding: 15px; }
-        .btn-op { width: 100%; padding: 12px; background: none; border: 1px solid var(--ac); color: var(--ac); font-weight: bold; cursor: pointer; margin: 5px 0; font-size: 0.8em; }
-        .btn-op:hover { background: var(--ac); color: #000; box-shadow: 0 0 20px var(--ac); }
-        .terminal { width: 100%; height: 80px; background: #010101; border: 1px solid var(--neon); padding: 8px; font-size: 10px; overflow-y: auto; }
-        @keyframes float { from { transform: translateY(100vh); opacity: 0; } to { transform: translateY(-10vh); opacity: 1; } }
+        :root { --neon: #00ffcc; --ac: #0ff; --gold: #ffd700; --bg: #000; --red: #ff4444; }
+        body, html { margin: 0; padding: 0; background: var(--bg); color: var(--neon); font-family: 'Courier New', monospace; overflow: hidden; height: 100vh; }
+        
+        /* HOLOGRAMA Ψ */
+        #hologram-field { position: fixed; top: 0; left: 0; z-index: -1; width: 100vw; height: 100vh; opacity: 0.4; }
+        .point { position: absolute; width: 2px; height: 2px; background: var(--ac); border-radius: 50%; animation: float 15s infinite linear; }
+
+        /* INTERFAZ HUD */
+        .hud { display: grid; grid-template-columns: 250px 1fr; height: 100vh; gap: 10px; padding: 15px; box-sizing: border-box; }
+        
+        /* MENÚ LATERAL */
+        .sidebar { border: 1px solid var(--ac); background: rgba(0,20,20,0.8); padding: 15px; display: flex; flex-direction: column; gap: 10px; }
+        .menu-btn { background: none; border: 1px solid var(--neon); color: var(--neon); padding: 12px; text-align: left; cursor: pointer; font-size: 0.75em; transition: 0.3s; text-transform: uppercase; }
+        .menu-btn:hover { background: var(--neon); color: #000; box-shadow: 0 0 15px var(--neon); }
+        .menu-btn.active { border-left: 5px solid var(--gold); background: rgba(0,255,204,0.1); }
+
+        /* PANEL CENTRAL */
+        .main-core { display: flex; flex-direction: column; gap: 10px; overflow: hidden; }
+        .header-info { border: 1px solid var(--gold); padding: 10px; font-size: 0.7em; display: flex; justify-content: space-between; background: rgba(50,40,0,0.2); }
+        .display-area { flex-grow: 1; border: 2px solid #fff; background: radial-gradient(circle, #001a00 0%, #000 100%); padding: 20px; position: relative; overflow-y: auto; }
+        
+        /* TERMINAL DE LOGS */
+        .terminal { height: 150px; border: 1px solid var(--ac); background: #010101; padding: 10px; font-size: 0.7em; color: var(--ac); overflow-y: auto; box-shadow: inset 0 0 10px var(--ac); }
+
+        @keyframes float { from { transform: translateY(100vh); opacity: 0; } to { transform: translateY(-5vh); opacity: 0.8; } }
+        @media (max-width: 768px) { .hud { grid-template-columns: 1fr; } .sidebar { display: grid; grid-template-columns: 1fr 1fr; } }
     </style>
 </head>
 <body>
     <div id="hologram-field"></div>
     <div class="hud">
-        <div class="pilar">[L][E][D][L]<br>A.C. | S.F.de L.</div>
-        <main class="core-display">
-            <header style="text-align: center; border-bottom: 2px solid var(--ac); width: 100%;">
-                <h1 style="margin: 5px 0; font-size: 1.1em; color: #fff;">🧠 CEREBRO OPERATIVO LEDL v4.0</h1>
-                <small>J ANDRES RESENDEZ R | ORCID: 0009-0007-3528-9413</small>
-            </header>
-            <div style="width: 100%;">
-                <button class="btn-op" onclick="run('PREVENTIVA', 'Escaneando...')">🛡️ MODULO ENSDELIZ PREVENTIVA</button>
-                <button class="btn-op" onclick="run('LOGISTICA', 'TARIFAS: $35 | $40 | $50')">📦 TARIFARIO LOGÍSTICO</button>
+        <aside class="sidebar">
+            <div style="font-size: 0.9em; margin-bottom: 10px; color: var(--gold);">📂 MAPA DE NODOS</div>
+            <button class="menu-btn" onclick="exec('PREVENTIVA')">📁 ENSDELIZ PREVENTIVA</button>
+            <button class="menu-btn" onclick="exec('LOGISTICA')">📦 VALLE DEL ROBLE LOGISTICS</button>
+            <button class="menu-btn" onclick="exec('AUDIT')">🛡️ AUDIT & SYSTEM</button>
+            <button class="menu-btn" onclick="location.reload()" style="border-color: var(--red); color: var(--red);">🔒 LOGOUT / RESET</button>
+        </aside>
+
+        <main class="main-core">
+            <div class="header-info">
+                <span>ORQUESTADOR: JARR</span>
+                <span>ORCID: 0009-0007-3528-9413</span>
+                <span>TEMP: 24°C</span>
             </div>
-            <div class="terminal" id="term">[SYSTEM]: Nodo v4.0 Sincronizado...<br></div>
+
+            <section class="display-area" id="screen">
+                <div style="text-align: center; margin-top: 50px;">
+                    <h2 style="color: #fff;">CEREBRO_OPERATIVO@TERM_V9</h2>
+                    <p>Esperando selección de nodo para mapeo neuronal...</p>
+                </div>
+            </section>
+
+            <footer class="terminal" id="term">
+                [SYSTEM]: Sincronización Neuronal: 94% | ETA: 01:22s<br>
+                [SYSTEM]: Listo para recibir comandos de J ANDRES RESENDEZ R.<br>
+            </footer>
         </main>
-        <div class="pilar" style="transform: scaleX(-1);">[L][E][D][L]<br>A.C. | S.F.de L.</div>
     </div>
+
     <script>
+        // Holograma
         const f = document.getElementById('hologram-field');
-        for(let i=0; i<80; i++) {
+        for(let i=0; i<60; i++){
             let p = document.createElement('div'); p.className = 'point';
             p.style.left = Math.random()*100+'vw'; p.style.animationDuration = (Math.random()*10+5)+'s';
             f.appendChild(p);
         }
-        function run(s, m) {
-            const t = document.getElementById('term');
-            t.innerHTML += `[${new Date().toLocaleTimeString()}] [${s}]: ${m}<br>`;
-            t.scrollTop = t.scrollHeight;
+
+        const screen = document.getElementById('screen');
+        const term = document.getElementById('term');
+
+        function log(msg, color='var(--ac)') {
+            term.innerHTML += `<span style="color:${color}">[${new Date().toLocaleTimeString()}] ${msg}</span><br>`;
+            term.scrollTop = term.scrollHeight;
+        }
+
+        function exec(node) {
+            screen.innerHTML = "";
+            if(node === 'LOGISTICA') {
+                log("Accediendo a Nodos Valle del Roble...", 'var(--gold)');
+                screen.innerHTML = `
+                    <h3 style="color:var(--gold)">📦 TARIFARIO LOGÍSTICO VDR</h3>
+                    <table style="width:100%; border-collapse: collapse; margin-top:20px; border: 1px solid var(--ac);">
+                        <tr style="background:rgba(0,255,204,0.2)">
+                            <th style="padding:10px; border:1px solid var(--ac)">HORARIO</th>
+                            <th style="padding:10px; border:1px solid var(--ac)">COMISIÓN FINA</th>
+                        </tr>
+                        <tr><td style="padding:10px; border:1px solid var(--ac)">TURNO MATUTINO</td><td style="padding:10px; border:1px solid var(--ac); font-weight:bold">$35.00 MXN</td></tr>
+                        <tr><td style="padding:10px; border:1px solid var(--ac)">TURNO VESPERTINO</td><td style="padding:10px; border:1px solid var(--ac); font-weight:bold">$40.00 MXN</td></tr>
+                        <tr><td style="padding:10px; border:1px solid var(--ac)">TURNO NOCTURNO</td><td style="padding:10px; border:1px solid var(--ac); font-weight:bold">$50.00 MXN</td></tr>
+                    </table>
+                    <p style="margin-top:20px; font-size:0.8em; color:var(--ac)">* Aplicable para el sector Valle del Roble, Cadereyta Jiménez.</p>
+                `;
+            } else if(node === 'PREVENTIVA') {
+                log("Iniciando Módulo EnsDeLiz Preventiva...", 'var(--neon)');
+                screen.innerHTML = `
+                    <h3 style="color:var(--neon)">🛡️ ENSDELIZ PREVENTIVA v1.0</h3>
+                    <div style="padding:20px; border:1px dashed var(--neon)">
+                        <p>ESTADO: 🟢 ACTIVO</p>
+                        <p>PROCESOS: 27 NODOS EN MONITOREO</p>
+                        <p>ALERTA: 0 AMENAZAS DETECTADAS</p>
+                        <progress value="94" max="100" style="width:100%"></progress>
+                    </div>
+                `;
+            } else if(node === 'AUDIT') {
+                log("Ejecutando Protocolo ARES-KAL...", 'var(--red)');
+                screen.innerHTML = `
+                    <h3 style="color:var(--red)">🔍 AUDITORÍA DE SISTEMA ARES-KAL</h3>
+                    <p>VERIFICANDO INTEGRIDAD DE J ANDRES RESENDEZ R...</p>
+                    <p>IP ORIGEN: 189.XXX.XXX.XXX</p>
+                    <p>IDENTIFICADOR: ORCID 0009-0007-3528-9413</p>
+                    <p style="color:var(--gold)">[VERIFICACIÓN]: 100% AUTÉNTICO</p>
+                `;
+            }
         }
     </script>
 </body>
 </html>
-
