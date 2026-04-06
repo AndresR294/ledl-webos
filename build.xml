@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Cerebro_Operativo_LEDL" default="sync-final" basedir=".">
+    <target name="sync-final">
+        <echo message="Sincronizando Nuevas Tarifas LEDL: $35, $40, $50"/>
+        <echo message="Calculando Peso Sinaptico: J Andres Resendez R."/>
+        <echo file="sinapsis.log" append="false">ID: J Andres Resendez R. | ORCID: 0009-0007-3528-9413 | STATUS: CLOUD_SYNC_ACTIVE</echo>
+    </target>
+</project>

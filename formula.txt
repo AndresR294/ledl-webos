@@ -1,0 +1,1 @@
+\Psi_{LEDL} = \int \frac{\text{Tarifa}_{Fixed} \cdot \text{Pulso}}{\text{ARES-Kal}} dt \rightarrow \text{Cloud\_Infinito}
