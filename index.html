@@ -2,40 +2,51 @@
 <html lang="es-MX">
 <head>
     <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-    <title>LEDL CORE | V5.3_FINAL</title>
+    <title>LEDL CORE | V6.0_STABLE</title>
     <style>
         :root { --neon: #00ffcc; --ac: #0ff; --gold: #ffd700; --bg: #000; }
-        body, html { margin: 0; padding: 0; background: var(--bg); color: var(--neon); font-family: monospace; height: 100vh; overflow: hidden; }
-        .hud { display: grid; grid-template-columns: 240px 1fr; height: 100vh; padding: 10px; gap: 10px; box-sizing: border-box; }
-        .sidebar { border: 1px solid var(--ac); padding: 10px; display: flex; flex-direction: column; gap: 10px; background: rgba(0,20,20,0.4); }
-        .menu-btn { background: #002222; border: 1px solid var(--neon); color: var(--neon); padding: 15px; cursor: pointer; font-size: 0.7em; width: 100%; border-radius: 5px; }
-        .menu-btn:hover { background: var(--neon); color: #000; box-shadow: 0 0 15px var(--neon); }
-        .display-area { border: 2px solid #fff; background: radial-gradient(circle, #001a00 0%, #000 100%); padding: 20px; overflow-y: auto; height: 70vh; }
-        .terminal { height: 100px; border: 1px solid var(--gold); background: #010101; padding: 10px; font-size: 0.6em; overflow-y: auto; color: var(--gold); margin-top: 10px; }
-        @media (max-width: 700px) { .hud { grid-template-columns: 1fr; } .sidebar { flex-direction: row; flex-wrap: wrap; height: auto; } .menu-btn { flex: 1; min-width: 100px; padding: 8px; font-size: 0.6em; } }
+        body, html { margin: 0; padding: 0; background: var(--bg); color: var(--neon); font-family: 'Courier New', monospace; height: 100vh; overflow: hidden; }
+        
+        /* BARRA SUPERIOR (MENÚ) */
+        .navbar { position: fixed; top: 0; left: 0; width: 100%; background: #001a1a; border-bottom: 2px solid var(--ac); display: flex; overflow-x: auto; z-index: 100; }
+        .nav-item { padding: 15px; border-right: 1px solid var(--neon); white-space: nowrap; cursor: pointer; font-size: 0.75em; text-transform: uppercase; font-weight: bold; }
+        .nav-item:active { background: var(--neon); color: #000; }
+        
+        /* CONTENEDOR PRINCIPAL */
+        .main-container { margin-top: 60px; height: calc(100vh - 60px); display: flex; flex-direction: column; padding: 10px; box-sizing: border-box; }
+        
+        /* ÁREA DE VISUALIZACIÓN */
+        .display-area { flex-grow: 1; border: 1px solid #fff; background: radial-gradient(circle, #001a00 0%, #000 100%); padding: 15px; overflow-y: auto; position: relative; margin-bottom: 10px; }
+        .data-card { background: rgba(0,255,204,0.05); border: 1px solid var(--ac); padding: 15px; margin-top: 10px; border-radius: 4px; }
+        
+        /* TERMINAL INFERIOR */
+        .terminal { height: 80px; border: 1px solid var(--gold); background: #010101; padding: 10px; font-size: 0.65em; overflow-y: auto; color: var(--gold); }
+        
+        h3 { margin-top: 0; color: #fff; border-bottom: 1px solid var(--gold); }
     </style>
 </head>
 <body>
-    <div class="hud">
-        <aside class="sidebar">
-            <div style="color:var(--gold); font-size: 0.8em;">📂 MAPA DE NODOS</div>
-            <button class="menu-btn" data-node="PREVENTIVA">📁 ENSDELIZ PREVENTIVA</button>
-            <button class="menu-btn" data-node="LOGISTICA">📦 VALLE DEL ROBLE LOGISTICS</button>
-            <button class="menu-btn" data-node="AUDIT">🛡️ AUDIT & SYSTEM</button>
-            <button class="menu-btn" onclick="location.reload(true)" style="color:red; border-color:red;">🔒 LOGOUT</button>
-        </aside>
-        <main style="display:flex; flex-direction:column;">
-            <section class="display-area" id="screen">
-                <div style="text-align: center; margin-top: 15%;">
-                    <h2 id="core-title">CEREBRO_OPERATIVO@V5.3_ACTIVO</h2>
-                    <p>SINCRONIZACIÓN NEURONAL: 100%</p>
-                    <p style="color:var(--gold)">J ANDRES RESENDEZ R: Pulse un nodo lateral.</p>
-                </div>
-            </section>
-            <footer class="terminal" id="log">[SYSTEM]: Inicializando Interfaz de Usuario...</footer>
-        </main>
+    <nav class="navbar">
+        <div class="nav-item" onclick="openNode('PREVENTIVA')">📁 PREVENTIVA</div>
+        <div class="nav-item" onclick="openNode('LOGISTICA')">📦 LOGÍSTICA VDR</div>
+        <div class="nav-item" onclick="openNode('AUDIT')">🛡️ AUDIT</div>
+        <div class="nav-item" onclick="location.reload()" style="color:red;">🔒 LOGOUT</div>
+    </nav>
+
+    <div class="main-container">
+        <section class="display-area" id="screen">
+            <div style="text-align: center; margin-top: 20%;">
+                <h2 id="core-status">CEREBRO_OPERATIVO@V6.0</h2>
+                <p>ORQUESTADOR: J ANDRES RESENDEZ R</p>
+                <p style="color:var(--gold)">Seleccione una categoría en la barra superior.</p>
+            </div>
+        </section>
+
+        <footer class="terminal" id="log">
+            [SYSTEM]: Nodo Central Sincronizado. Esperando comandos...
+        </footer>
     </div>
+
     <script>
         const screen = document.getElementById('screen');
         const log = document.getElementById('log');
@@ -45,30 +56,38 @@
             log.scrollTop = log.scrollHeight;
         }
 
-        document.querySelectorAll('.menu-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                const node = btn.getAttribute('data-node');
-                if(!node) return;
-                
-                updateLog(`Accediendo a Nodo: ${node}...`);
-                
-                if(node === 'LOGISTICA') {
-                    screen.innerHTML = `<h3>📦 VALLE DEL ROBLE LOGISTICS</h3>
-                    <p>TARIFARIO OFICIAL (VIGENTE):</p>
-                    <div style="border:1px solid var(--ac); padding:10px; margin:5px 0;">MATUTINO: <b>$35.00</b></div>
-                    <div style="border:1px solid var(--ac); padding:10px; margin:5px 0;">VESPERTINO: <b>$40.00</b></div>
-                    <div style="border:1px solid var(--ac); padding:10px; margin:5px 0;">NOCTURNO: <b>$50.00</b></div>`;
-                } else if(node === 'PREVENTIVA') {
-                    screen.innerHTML = `<h3>🛡️ MODULO ENSDELIZ PREVENTIVA</h3>
-                    <p>ESTADO: <span style="color:#0f0;">🟢 PROTEGIDO</span></p>
-                    <p>NODOS: 27 ACTIVOS Y SINCRONIZADOS</p>`;
-                } else if(node === 'AUDIT') {
-                    screen.innerHTML = `<h3>🛡️ AUDIT & SYSTEM</h3>
-                    <p>ORQUESTADOR: J ANDRES RESENDEZ R</p>
-                    <p>ORCID: 0009-0007-3528-9413</p>`;
-                }
-            });
-        });
+        function openNode(type) {
+            updateLog(`Acceso a Nodo: ${type}...`);
+            
+            if(type === 'LOGISTICA') {
+                screen.innerHTML = `
+                    <h3>📦 VALLE DEL ROBLE LOGISTICS</h3>
+                    <div class="data-card">
+                        <p>TARIFARIO FIJO ACTUALIZADO:</p>
+                        <p>🌅 MATUTINO: <b>$35.00</b></p>
+                        <p>🌆 VESPERTINO: <b>$40.00</b></p>
+                        <p>🌃 NOCTURNO: <b>$50.00</b></p>
+                        <hr>
+                        <p style="font-size:0.7em;">Comisión ajustada según LEDL 2026.</p>
+                    </div>`;
+            } else if(type === 'PREVENTIVA') {
+                screen.innerHTML = `
+                    <h3>🛡️ MODULO ENSDELIZ PREVENTIVA</h3>
+                    <div class="data-card">
+                        <p>ESTADO: <span style="color:#0f0;">🟢 ACTIVO</span></p>
+                        <p>ESCANEO: 27 NODOS OPERATIVOS</p>
+                        <p>FILTRO: PREDICCIÓN DE RUTAS ACTIVADA</p>
+                    </div>`;
+            } else if(type === 'AUDIT') {
+                screen.innerHTML = `
+                    <h3>🛡️ AUDIT & SYSTEM</h3>
+                    <div class="data-card">
+                        <p>USUARIO: J ANDRES RESENDEZ R</p>
+                        <p>ID: ORCID 0009-0007-3528-9413</p>
+                        <p>SISTEMA: ENSDELIZ® CORE</p>
+                    </div>`;
+            }
+        }
     </script>
 </body>
 </html>
