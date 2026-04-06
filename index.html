@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LEDL CORE | MODO DIOS v4.0</title>
+    <style>
+        :root { --neon: #00ffcc; --ac: #0ff; --gold: #ffd700; --bg: #000; }
+        body, html { margin: 0; padding: 0; background: var(--bg); color: var(--neon); font-family: monospace; overflow: hidden; }
+        #hologram-field { position: fixed; top: 0; left: 0; z-index: -1; width: 100vw; height: 100vh; }
+        .point { position: absolute; width: 3px; height: 3px; background: var(--ac); border-radius: 50%; box-shadow: 0 0 10px var(--ac); animation: float 15s infinite linear; }
+        .hud { display: grid; grid-template-columns: 1fr 2fr 1fr; height: 100vh; padding: 10px; gap: 10px; box-sizing: border-box; }
+        .pilar { border: 1px solid var(--neon); background: rgba(0,15,0,0.9); padding: 10px; font-size: 0.65em; text-align: center; display: flex; align-items: center; justify-content: center; }
+        .core-display { grid-column: 2; border: 2px solid #fff; background: radial-gradient(circle, #001a00 0%, #000 95%); display: flex; flex-direction: column; align-items: center; justify-content: space-between; padding: 15px; }
+        .btn-op { width: 100%; padding: 12px; background: none; border: 1px solid var(--ac); color: var(--ac); font-weight: bold; cursor: pointer; margin: 5px 0; font-size: 0.8em; }
+        .btn-op:hover { background: var(--ac); color: #000; box-shadow: 0 0 20px var(--ac); }
+        .terminal { width: 100%; height: 80px; background: #010101; border: 1px solid var(--neon); padding: 8px; font-size: 10px; overflow-y: auto; }
+        @keyframes float { from { transform: translateY(100vh); opacity: 0; } to { transform: translateY(-10vh); opacity: 1; } }
+    </style>
+</head>
+<body>
+    <div id="hologram-field"></div>
+    <div class="hud">
+        <div class="pilar">[L][E][D][L]<br>A.C. | S.F.de L.</div>
+        <main class="core-display">
+            <header style="text-align: center; border-bottom: 2px solid var(--ac); width: 100%;">
+                <h1 style="margin: 5px 0; font-size: 1.1em; color: #fff;">🧠 CEREBRO OPERATIVO LEDL v4.0</h1>
+                <small>J ANDRES RESENDEZ R | ORCID: 0009-0007-3528-9413</small>
+            </header>
+            <div style="width: 100%;">
+                <button class="btn-op" onclick="run('PREVENTIVA', 'Escaneando...')">🛡️ MODULO ENSDELIZ PREVENTIVA</button>
+                <button class="btn-op" onclick="run('LOGISTICA', 'TARIFAS: $35 | $40 | $50')">📦 TARIFARIO LOGÍSTICO</button>
+            </div>
+            <div class="terminal" id="term">[SYSTEM]: Nodo v4.0 Sincronizado...<br></div>
+        </main>
+        <div class="pilar" style="transform: scaleX(-1);">[L][E][D][L]<br>A.C. | S.F.de L.</div>
+    </div>
+    <script>
+        const f = document.getElementById('hologram-field');
+        for(let i=0; i<80; i++) {
+            let p = document.createElement('div'); p.className = 'point';
+            p.style.left = Math.random()*100+'vw'; p.style.animationDuration = (Math.random()*10+5)+'s';
+            f.appendChild(p);
+        }
+        function run(s, m) {
+            const t = document.getElementById('term');
+            t.innerHTML += `[${new Date().toLocaleTimeString()}] [${s}]: ${m}<br>`;
+            t.scrollTop = t.scrollHeight;
+        }
+    </script>
+</body>
+</html>
