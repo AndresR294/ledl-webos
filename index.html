@@ -1,54 +1,86 @@
 <!DOCTYPE html>
-<html lang="it">
+<html lang="es-MX">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>LEDL CORE | V9.1</title>
+    <title>LEDL CORE | V9.2</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-        body { background: #000; color: #0ff; font-family: monospace; height: 100vh; overflow: hidden; display: flex; flex-direction: column; }
-        .nav { background: #001a1a; border-bottom: 2px solid #0ff; padding: 10px; display: flex; overflow-x: auto; gap: 8px; z-index: 10000; position: sticky; top: 0; }
-        .btn { background: #003333; border: 1px solid #0ff; color: #0ff; padding: 12px 20px; font-size: 11px; border-radius: 5px; white-space: nowrap; flex-shrink: 0; font-weight: bold; }
-        .btn:active { background: #0ff; color: #000; }
-        #display { flex: 1; padding: 20px; overflow-y: auto; background: #000; border: 1px solid #333; margin: 5px; position: relative; }
-        .card { border: 1px solid #ffd700; background: rgba(255,215,0,0.05); padding: 15px; margin-top: 10px; text-align: left; }
-        #log { height: 80px; background: #050505; border-top: 1px solid #ffd700; color: #ffd700; font-size: 10px; padding: 10px; overflow-y: auto; }
+        body { background: #000; color: #0ff; font-family: monospace; height: 100vh; display: flex; flex-direction: column; overflow: hidden; }
+        
+        /* BARRA SUPERIOR FIJA (Z-INDEX MÁXIMO) */
+        .navbar { 
+            background: #001a1a; border-bottom: 2px solid #0ff; padding: 12px; 
+            display: flex; overflow-x: auto; gap: 10px; z-index: 10000; position: sticky; top: 0;
+        }
+        .nav-btn { 
+            background: #003333; border: 1px solid #0ff; color: #0ff; padding: 14px 20px; 
+            font-size: 11px; border-radius: 6px; white-space: nowrap; flex-shrink: 0; font-weight: bold;
+        }
+        .nav-btn:active { background: #0ff; color: #000; }
+
+        /* PANEL DE DATOS (REEMPLAZA EL CONTENIDO) */
+        #display-panel { 
+            flex: 1; padding: 20px; overflow-y: auto; background: #000; 
+            border: 1px solid #222; margin: 8px; position: relative; z-index: 10;
+        }
+        .info-card { border: 1px solid #ffd700; background: rgba(255,215,0,0.05); padding: 18px; margin-top: 10px; text-align: left; border-radius: 4px; }
+        
+        #terminal-footer { height: 70px; background: #050505; border-top: 1px solid #ffd700; color: #ffd700; font-size: 10px; padding: 10px; overflow-y: auto; }
     </style>
 </head>
 <body>
-    <div class="nav">
-        <button class="btn" onclick="run('LOG')">📦 LOGÍSTICA VDR</button>
-        <button class="btn" onclick="run('PREV')">🛡️ PREVENTIVA</button>
-        <button class="btn" onclick="run('AUDIT')">🔍 AUDIT</button>
-        <button class="btn" onclick="location.reload(true)" style="color:red; border-color:red;">🔒 RESET</button>
+    <div class="navbar">
+        <button class="nav-btn" onclick="run('LOG')">📦 LOGÍSTICA VDR</button>
+        <button class="nav-btn" onclick="run('PREV')">🛡️ PREVENTIVA</button>
+        <button class="nav-btn" onclick="run('AUDIT')">🔍 AUDIT</button>
+        <button class="nav-btn" onclick="location.reload(true)" style="border-color:red; color:red;">🔒 RESET</button>
     </div>
-    <div id="display">
-        <div style="text-align: center; margin-top: 20%;">
-            <h2 style="color:#fff;">CEREBRO_OPERATIVO@V9.1</h2>
-            <p>J ANDRES RESENDEZ R</p>
-            <p style="color:#ffd700; margin-top:20px;">[SISTEMA ATTIVO]: Seleziona un nodo superiore.</p>
+
+    <div id="display-panel">
+        <div style="text-align: center; margin-top: 25%;">
+            <h2 style="color:#fff; text-shadow: 0 0 8px #0ff;">CEREBRO_OPERATIVO@V9.2</h2>
+            <p style="font-size:12px; margin-top:10px;">WEBMASTER: J ANDRES RESENDEZ R</p>
+            <p style="color:#ffd700; margin-top:30px; border:1px dashed #ffd700; padding:15px;">
+                [SISTEMA LISTO]<br>Toque un nodo superior para ver datos.
+            </p>
         </div>
     </div>
-    <div id="log">[SYSTEM]: Sincronizzazione Nodo Valle del Roble...</div>
+
+    <div id="terminal-footer">[SYSTEM]: Sincronizado con nodo Valle del Roble. Esperando comando...</div>
+
     <script>
-        function run(n) {
-            const d = document.getElementById('display');
-            const l = document.getElementById('log');
-            l.innerHTML += '<br>[' + new Date().toLocaleTimeString() + '] Accesso: ' + n;
-            l.scrollTop = l.scrollHeight;
-            if(n === 'LOG') {
-                d.innerHTML = '<div class="card"><h3>📦 LOGISTICA VDR</h3>' +
-                '<p>MATUTINO: <b>$35.00</b></p>' +
-                '<p>VESPERTINO: <b>$40.00</b></p>' +
-                '<p>NOCTURNO: <b>$50.00</b></p></div>';
-            } else if(n === 'PREV') {
-                d.innerHTML = '<div class="card"><h3>🛡️ PREVENTIVA</h3>' +
-                '<p>STATO: 🟢 PROTETTO</p>' +
-                '<p>NODI: 27 ATTIVI</p></div>';
-            } else if(n === 'AUDIT') {
-                d.innerHTML = '<div class="card"><h3>🔍 AUDIT & SYSTEM</h3>' +
-                '<p>ORCID: 0009-0007-3528-9413</p>' +
-                '<p>UTENTE: J ANDRES RESENDEZ R</p></div>';
+        function run(node) {
+            const panel = document.getElementById('display-panel');
+            const log = document.getElementById('terminal-footer');
+            log.innerHTML += `<br>[${new Date().toLocaleTimeString()}] Acceso: ${node}`;
+            log.scrollTop = log.scrollHeight;
+
+            if(node === 'LOG') {
+                panel.innerHTML = `
+                    <div class="info-card">
+                        <h3 style="color:#0ff; border-bottom:1px solid #0ff; margin-bottom:10px;">📦 TARIFARIO VDR</h3>
+                        <p>🌅 MATUTINO: <b style="font-size:1.2em;">$35.00</b></p>
+                        <p>🌆 VESPERTINO: <b style="font-size:1.2em;">$40.00</b></p>
+                        <p>🌃 NOCTURNO: <b style="font-size:1.2em;">$50.00</b></p>
+                        <p style="margin-top:15px; font-size:0.8em; color:#ffd700;">* LEDL_OS 2026 - TARIFA FIJA</p>
+                    </div>`;
+            } else if(node === 'PREV') {
+                panel.innerHTML = `
+                    <div class="info-card">
+                        <h3>🛡️ MODULO ENSDELIZ PREVENTIVA</h3>
+                        <p>ESTADO: <span style="color:#0f0;">🟢 ACTIVO</span></p>
+                        <p>NODOS: 27 PROTEGIDOS</p>
+                        <p>AIKO: PRED_RUTAS_INIT... [OK]</p>
+                    </div>`;
+            } else if(node === 'AUDIT') {
+                panel.innerHTML = `
+                    <div class="info-card">
+                        <h3>🔍 AUDIT & SYSTEM</h3>
+                        <p>J ANDRES RESENDEZ R</p>
+                        <p>ORCID: 0009-0007-3528-9413</p>
+                        <p>TEMP: 24°C</p>
+                    </div>`;
             }
         }
     </script>
