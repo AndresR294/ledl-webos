@@ -1,91 +1,72 @@
 <!DOCTYPE html>
 <html lang="es-MX">
 <head>
-    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LEDL CORE | V6.0_STABLE</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>LEDL CORE | V6.1</title>
     <style>
-        :root { --neon: #00ffcc; --ac: #0ff; --gold: #ffd700; --bg: #000; }
-        body, html { margin: 0; padding: 0; background: var(--bg); color: var(--neon); font-family: 'Courier New', monospace; height: 100vh; overflow: hidden; }
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        body { margin: 0; background: #000; color: #00ffcc; font-family: monospace; height: 100vh; display: flex; flex-direction: column; }
         
-        /* BARRA SUPERIOR (MENÚ) */
-        .navbar { position: fixed; top: 0; left: 0; width: 100%; background: #001a1a; border-bottom: 2px solid var(--ac); display: flex; overflow-x: auto; z-index: 100; }
-        .nav-item { padding: 15px; border-right: 1px solid var(--neon); white-space: nowrap; cursor: pointer; font-size: 0.75em; text-transform: uppercase; font-weight: bold; }
-        .nav-item:active { background: var(--neon); color: #000; }
+        /* BARRA SUPERIOR FIJA */
+        .header { background: #001a1a; border-bottom: 2px solid #0ff; padding: 10px; z-index: 1000; }
+        .nav { display: flex; overflow-x: auto; gap: 10px; padding-bottom: 5px; }
+        .btn { background: #002222; border: 1px solid #00ffcc; color: #00ffcc; padding: 12px; font-size: 11px; white-space: nowrap; border-radius: 4px; flex-shrink: 0; }
+        .btn:active { background: #00ffcc; color: #000; }
+
+        /* ÁREA DE DATOS */
+        .content { flex: 1; padding: 15px; overflow-y: auto; background: radial-gradient(circle, #001100 0%, #000 100%); border: 1px solid #333; margin: 5px; }
+        .card { border: 1px solid #0ff; background: rgba(0,255,255,0.05); padding: 15px; margin-top: 10px; line-height: 1.6; }
         
-        /* CONTENEDOR PRINCIPAL */
-        .main-container { margin-top: 60px; height: calc(100vh - 60px); display: flex; flex-direction: column; padding: 10px; box-sizing: border-box; }
+        /* TERMINAL LOG */
+        .term { height: 100px; background: #050505; border-top: 1px solid #ffd700; color: #ffd700; font-size: 10px; padding: 8px; overflow-y: auto; }
         
-        /* ÁREA DE VISUALIZACIÓN */
-        .display-area { flex-grow: 1; border: 1px solid #fff; background: radial-gradient(circle, #001a00 0%, #000 100%); padding: 15px; overflow-y: auto; position: relative; margin-bottom: 10px; }
-        .data-card { background: rgba(0,255,204,0.05); border: 1px solid var(--ac); padding: 15px; margin-top: 10px; border-radius: 4px; }
-        
-        /* TERMINAL INFERIOR */
-        .terminal { height: 80px; border: 1px solid var(--gold); background: #010101; padding: 10px; font-size: 0.65em; overflow-y: auto; color: var(--gold); }
-        
-        h3 { margin-top: 0; color: #fff; border-bottom: 1px solid var(--gold); }
+        .title { font-size: 14px; text-align: center; margin: 10px 0; color: #fff; text-shadow: 0 0 5px #0ff; }
     </style>
 </head>
 <body>
-    <nav class="navbar">
-        <div class="nav-item" onclick="openNode('PREVENTIVA')">📁 PREVENTIVA</div>
-        <div class="nav-item" onclick="openNode('LOGISTICA')">📦 LOGÍSTICA VDR</div>
-        <div class="nav-item" onclick="openNode('AUDIT')">🛡️ AUDIT</div>
-        <div class="nav-item" onclick="location.reload()" style="color:red;">🔒 LOGOUT</div>
-    </nav>
-
-    <div class="main-container">
-        <section class="display-area" id="screen">
-            <div style="text-align: center; margin-top: 20%;">
-                <h2 id="core-status">CEREBRO_OPERATIVO@V6.0</h2>
-                <p>ORQUESTADOR: J ANDRES RESENDEZ R</p>
-                <p style="color:var(--gold)">Seleccione una categoría en la barra superior.</p>
-            </div>
-        </section>
-
-        <footer class="terminal" id="log">
-            [SYSTEM]: Nodo Central Sincronizado. Esperando comandos...
-        </footer>
+    <div class="header">
+        <div style="font-size: 10px; color: #ffd700; margin-bottom: 5px;">📂 CEREBRO OPERATIVO LEDL</div>
+        <div class="nav">
+            <button class="btn" onclick="show('LOG')">📦 LOGÍSTICA VDR</button>
+            <button class="btn" onclick="show('PREV')">🛡️ PREVENTIVA</button>
+            <button class="btn" onclick="show('AUDIT')">🔍 AUDIT</button>
+            <button class="btn" onclick="location.reload(true)" style="border-color: red; color: red;">🔒 RESET</button>
+        </div>
     </div>
 
+    <div class="content" id="view">
+        <div style="text-align: center; opacity: 0.7; margin-top: 30%;">
+            <div class="title">SISTEMA v6.1 ONLINE</div>
+            <p>J ANDRES RESENDEZ R</p>
+            <p>Pulse un botón de la barra superior para iniciar mapeo.</p>
+        </div>
+    </div>
+
+    <div class="term" id="log">[SYSTEM]: Nodo Valle del Roble Sincronizado...</div>
+
     <script>
-        const screen = document.getElementById('screen');
-        const log = document.getElementById('log');
+        function show(type) {
+            const v = document.getElementById('view');
+            const l = document.getElementById('log');
+            l.innerHTML += `<br>[${new Date().toLocaleTimeString()}] Accediendo a ${type}...`;
+            l.scrollTop = l.scrollHeight;
 
-        function updateLog(msg) {
-            log.innerHTML += `<br>[${new Date().toLocaleTimeString()}] ${msg}`;
-            log.scrollTop = log.scrollHeight;
-        }
-
-        function openNode(type) {
-            updateLog(`Acceso a Nodo: ${type}...`);
-            
-            if(type === 'LOGISTICA') {
-                screen.innerHTML = `
-                    <h3>📦 VALLE DEL ROBLE LOGISTICS</h3>
-                    <div class="data-card">
-                        <p>TARIFARIO FIJO ACTUALIZADO:</p>
-                        <p>🌅 MATUTINO: <b>$35.00</b></p>
-                        <p>🌆 VESPERTINO: <b>$40.00</b></p>
-                        <p>🌃 NOCTURNO: <b>$50.00</b></p>
-                        <hr>
-                        <p style="font-size:0.7em;">Comisión ajustada según LEDL 2026.</p>
-                    </div>`;
-            } else if(type === 'PREVENTIVA') {
-                screen.innerHTML = `
-                    <h3>🛡️ MODULO ENSDELIZ PREVENTIVA</h3>
-                    <div class="data-card">
-                        <p>ESTADO: <span style="color:#0f0;">🟢 ACTIVO</span></p>
-                        <p>ESCANEO: 27 NODOS OPERATIVOS</p>
-                        <p>FILTRO: PREDICCIÓN DE RUTAS ACTIVADA</p>
-                    </div>`;
+            if(type === 'LOG') {
+                v.innerHTML = `<div class="card"><h3>📦 TARIFARIO VDR</h3>
+                <p>MATUTINO: <b>$35.00</b></p>
+                <p>VESPERTINO: <b>$40.00</b></p>
+                <p>NOCTURNO: <b>$50.00</b></p></div>`;
+            } else if(type === 'PREV') {
+                v.innerHTML = `<div class="card"><h3>🛡️ ENSDELIZ PREVENTIVA</h3>
+                <p>ESTADO: 🟢 ACTIVO</p>
+                <p>NODOS: 27 PROTEGIDOS</p>
+                <p>AIKO: PRED_RUTAS_INIT [OK]</p></div>`;
             } else if(type === 'AUDIT') {
-                screen.innerHTML = `
-                    <h3>🛡️ AUDIT & SYSTEM</h3>
-                    <div class="data-card">
-                        <p>USUARIO: J ANDRES RESENDEZ R</p>
-                        <p>ID: ORCID 0009-0007-3528-9413</p>
-                        <p>SISTEMA: ENSDELIZ® CORE</p>
-                    </div>`;
+                v.innerHTML = `<div class="card"><h3>🔍 AUDIT & SYSTEM</h3>
+                <p>ORQUESTADOR: JARR</p>
+                <p>ORCID: 0009-0007-3528-9413</p>
+                <p>TEMP: 24°C</p></div>`;
             }
         }
     </script>
